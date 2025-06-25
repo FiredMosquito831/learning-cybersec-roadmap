@@ -216,3 +216,128 @@ This guide is structured into **modules**, each with:
 - **Stay consistent** — even 1 hour/day can lead to mastery over time.
 
 ---
+
+
+
+
+
+
+
+---
+
+# 🛠️ Free Cybersecurity Learning Roadmap (12-Week Plan)
+
+> A self-paced, chapter-by-chapter learning journey focused on **Linux/Unix systems, networking, ethical hacking, and hands-on labs** — all using **free resources only**.
+
+---
+
+## 📅 12-Week Study Plan
+
+| Week | Module | Goals | Resources |
+|------|--------|-------|-----------|
+| **Week 1–2** | 🔹 Networking & Linux Basics | Understand IP addresses, TCP/IP, basic Linux commands | [Linux Journey](https://linuxjourney.com/), [Cisco Packet Tracer](https://www.netacad.com/courses/packet-tracer) |
+| **Week 3–4** | 🔹 Linux System Administration | Learn file permissions, users, services, scripting | [Linux From Scratch](https://www.linuxfromscratch.org/), Kali Linux CLI |
+| **Week 5–6** | 🔹 Ethical Hacking Intro | Use Nmap, Gobuster, Metasploit, SQLMap | [TryHackMe – Free Rooms](https://tryhackme.com/), [Metasploit Unleashed](https://www.offensive-security.com/metasploit-unleashed/) |
+| **Week 7–8** | 🔹 Web App Security | OWASP Top 10, XSS, SQLi, IDOR | [PortSwigger Academy](https://portswigger.net/web-security), Burp Suite |
+| **Week 9–10** | 🔹 Malware Analysis | Reverse engineering basics with Ghidra | [Practical Malware Analysis PDF](https://nostarch.com/malware), [Ghidra](https://ghidra-sre.org/) |
+| **Week 11–12** | 🔹 Capture The Flag (CTF) Challenges | Apply skills in real-world scenarios | [OverTheWire](https://overthewire.org/wargames/), [PicoCTF Archive](https://play.picoctf.org/) |
+
+---
+
+## ✅ Weekly Checklist Template
+
+Use this template to track your progress weekly. Print it or use it digitally!
+
+```
+🟩 Week 1–2: Networking & Linux Basics
+☐ Read Linux Journey - Networking section
+☐ Install Kali Linux / WSL
+☐ Practice Linux commands (ls, cd, mkdir, chmod)
+☐ Build network in Cisco Packet Tracer
+☐ Complete TryHackMe room: "Intro to Security"
+
+🟩 Week 3–4: Linux Admin & Scripting
+☐ Set up user accounts and permissions
+☐ Write a Bash script that automates a task
+☐ Configure firewall (ufw)
+☐ Mount and manage storage devices
+☐ Explore systemd and journalctl logs
+
+🟩 Week 5–6: Ethical Hacking Intro
+☐ Scan targets with Nmap
+☐ Enumerate web directories with Gobuster
+☐ Exploit vulnerable machines on TryHackMe
+☐ Use Metasploit for post-exploitation
+☐ Practice privilege escalation techniques
+
+🟩 Week 7–8: Web App Security
+☐ Test XSS and SQL injection on PortSwigger labs
+☐ Use Burp Suite to intercept HTTP requests
+☐ Analyze cookies and session tokens
+☐ Practice CSRF and IDOR attacks
+☐ Submit a mock bug bounty report
+
+🟩 Week 9–10: Malware Analysis
+☐ Install Ghidra and x64dbg
+☐ Analyze sample malware binary
+☐ Extract strings and functions
+☐ Identify indicators of compromise (IOCs)
+☐ Document behavior in a sandboxed VM
+
+🟩 Week 11–12: CTF Challenges
+☐ Complete OverTheWire Bandit level 0–10
+☐ Solve PicoCTF beginner challenges
+☐ Play Hack The Box Starting Point machines
+☐ Write up solutions in a blog or GitHub repo
+☐ Join a live CTF event (e.g., vsCTF)
+```
+
+---
+
+## 🧾 Tools You’ll Use (All Free)
+
+| Tool | Purpose |
+|------|---------|
+| **Kali Linux** | Penetration testing OS with pre-installed tools |
+| **VirtualBox** | Run virtual machines safely |
+| **Wireshark** | Network packet analysis |
+| **Nmap** | Network scanning and discovery |
+| **Burp Suite CE** | Web vulnerability testing |
+| **Ghidra** | NSA reverse engineering tool |
+| **Metasploit Framework** | Exploitation and payload delivery |
+| **SQLMap** | Automate SQL injection testing |
+| **x64dbg** | Free debugger for RE |
+| **Cisco Packet Tracer** | Simulate networks and learn routing |
+
+---
+
+## 📁 Suggested Folder Structure (for Organization)
+
+Create a folder system to keep everything organized:
+
+```
+Cybersecurity-Learning/
+│
+├── Notes/
+│   ├── week1-notes.md
+│   └── ...
+│
+├── Labs/
+│   ├── nmap-scans/
+│   ├── bash-scripts/
+│   └── exploit-reports/
+│
+├── Screenshots/
+│   ├── ctf-solutions/
+│   └── lab-progress/
+│
+├── Walkthroughs/
+│   └── tryhackme-rooms/
+│
+└── Projects/
+    ├── firewall-config/
+    ├── malware-analysis/
+    └── ctf-writeups/
+```
+
+---
