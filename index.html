@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12-Week Free Cybersecurity Learning Path</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font import */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Styling for the section titles within cards */
+        .card-section-title {
+            font-weight: 600; /* Semi-bold */
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        /* Default list styling for unordered lists */
+        ul {
+            list-style: disc;
+            margin-left: 1.25rem; /* Equivalent to pl-5 in Tailwind */
+        }
+        /* Default list styling for ordered lists (though not explicitly used for dynamic content here) */
+        ol {
+            list-style: decimal;
+            margin-left: 1.25rem;
+        }
+        /* Spacing for list items */
+        li {
+            margin-bottom: 0.25rem;
+        }
+        /* Custom styling for links within the cards to ensure readability and responsiveness */
+        .card-content a {
+            color: inherit; /* Inherit text color from the parent card section */
+            text-decoration: underline; /* Standard underline for links */
+            word-break: break-all; /* Ensures long URLs break and wrap correctly */
+        }
+        .card-content a:hover {
+            color: #3b82f6; /* A subtle blue on hover for better user feedback */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased">
+    <div id="root" class="p-4 sm:p-6 md:p-8"></div>
+
+    <!-- React CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- Babel Standalone CDN for JSX transformation in the browser -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+        // Data for the roadmap cards
+        const roadmapData = [
+          {
+            week: 'Week 1–2',
+            module: 'Networking & Linux Basics',
+            iconName: 'Globe', // Changed to string for direct SVG lookup
+            color: 'blue',
+            sections: {
+              knowledge: 'TCP/IP basics, IP addresses, Linux CLI navigation',
+              resources: '[Linux Journey – Networking](https://linuxjourney.com/), [Cisco Packet Tracer](https://www.netacad.com/courses/packet-tracer)',
+              practice: 'Install Kali Linux or WSL, run commands like ls, cd, mkdir, chmod',
+              topics: 'IP addressing, DNS, DHCP, Linux file system structure, permissions',
+              next: 'Build on these basics with deeper Linux administration skills',
+              extra: [
+                'Simulate a network with 2 PCs, 1 router, and 1 switch in Cisco PT',
+                'Create a folder structure for storing notes and scripts',
+                'Write a Bash script that lists all files in a directory and saves output to a file',
+              ],
+            },
+          },
+          {
+            week: 'Week 3–4',
+            module: 'Linux System Administration',
+            iconName: 'Terminal',
+            color: 'green',
+            sections: {
+              knowledge: 'Users, groups, services, scripting',
+              resources: '[Linux From Scratch](https://www.linuxfromscratch.org/), Bash guides',
+              practice: 'Create users/groups, write Bash scripts, configure ufw firewall',
+              topics: 'systemd, journalctl logs, cron jobs, file permissions',
+              next: 'Use Linux admin skills in real-world hacking scenarios',
+              extra: [
+                'Set up a local web server using Apache/Nginx',
+                'Schedule a daily log cleanup script with cron',
+                'Configure SSH keys and disable password login',
+                'Mount and manage external storage devices',
+              ],
+            },
+          },
+          {
+            week: 'Week 5–6',
+            module: 'Ethical Hacking Intro',
+            iconName: 'Bug',
+            color: 'yellow',
+            sections: {
+              knowledge: 'Reconnaissance, scanning, exploitation',
+              resources: '[TryHackMe Free Rooms](https://tryhackme.com/), [Metasploit Unleashed](https://www.offensive-security.com/metasploit-unleashed/)',
+              practice: 'Run Nmap scans, use Gobuster, exploit TryHackMe machines',
+              topics: 'Enumeration, payload delivery, privilege escalation',
+              next: 'Move into web app security and vulnerability testing',
+              extra: [
+                'Scan a local network and identify active hosts',
+                'Enumerate services and open ports on a vulnerable machine',
+                'Exploit a basic buffer overflow (using safe test environments)',
+                'Capture flags from TryHackMe rooms like "Nmap" and "OWASP Top 10"',
+              ],
+            },
+          },
+          {
+            week: 'Week 7–8',
+            module: 'Web App Security',
+            iconName: 'ShieldCheck',
+            color: 'red',
+            sections: {
+              knowledge: 'OWASP Top 10, XSS, SQLi, IDOR',
+              resources: '[PortSwigger Academy](https://portswigger.net/web-security), Burp Suite Community Edition',
+              practice: 'Test XSS/SQli, intercept HTTP requests, analyze cookies',
+              topics: 'Session management, CSRF, token manipulation',
+              next: 'Learn malware analysis and reverse engineering',
+              extra: [
+                'Find and exploit XSS vulnerabilities in PortSwigger labs',
+                'Perform SQL injection attacks on intentionally vulnerable apps',
+                'Intercept and modify HTTP requests using Burp Suite',
+                'Submit a mock bug bounty report documenting a vulnerability',
+              ],
+            },
+          },
+          {
+            week: 'Week 9–10',
+            module: 'Malware Analysis & Reverse Engineering',
+            iconName: 'AlertTriangle', // Using AlertTriangle for Malware icon
+            color: 'purple',
+            sections: {
+              knowledge: 'Binary analysis, Ghidra usage',
+              resources: '[Practical Malware Analysis PDF](https://nostarch.com/malware), [Ghidra](https://ghidra-sre.org/)',
+              practice: 'Analyze malware samples, extract strings/functions',
+              topics: 'Static/dynamic analysis, disassembly, indicators of compromise',
+              next: 'Apply all skills in live CTF challenges',
+              extra: [
+                'Analyze a sample malware binary using Ghidra',
+                'Extract strings and find hardcoded IPs or domains',
+                'Identify suspicious behavior in sandboxed environments',
+                'Document findings in a formal malware analysis report',
+              ],
+            },
+          },
+          {
+            week: 'Week 11–12',
+            module: 'Capture The Flag (CTF) Challenges',
+            iconName: 'Flag',
+            color: 'orange', // Using orange for brown-like appearance
+            sections: {
+              knowledge: 'Real-world problem-solving',
+              resources: '[OverTheWire](https://overthewire.org/wargames/), [PicoCTF Archive](https://play.picoctf.org/), [Hack The Box Starting Point](https://app.hackthebox.com/)',
+              practice: 'Solve puzzles, escalate privileges, capture flags',
+              topics: 'Applying networking, Linux, hacking, web, and malware skills',
+              next: 'Continue learning or begin applying for entry-level cybersecurity roles',
+              extra: [
+                'Complete OverTheWire Bandit levels 0–10',
+                'Solve PicoCTF beginner-level challenges',
+                'Finish Hack The Box Starting Point machines (e.g., Red, Blue, Fawn)',
+                'Write up solutions and publish them on GitHub or a blog',
+              ],
+            },
+          },
+        ];
+
+        // Mapping for color schemes to Tailwind classes
+        const colorMap = {
+          blue: { bg: 'bg-blue-100', text: 'text-blue-800', border: 'border-blue-500', headerBg: 'bg-blue-500', headerText: 'text-white' },
+          green: { bg: 'bg-green-100', text: 'text-green-800', border: 'border-green-500', headerBg: 'bg-green-500', headerText: 'text-white' },
+          yellow: { bg: 'bg-yellow-100', text: 'text-yellow-800', border: 'border-yellow-500', headerBg: 'bg-yellow-500', headerText: 'text-gray-900' },
+          red: { bg: 'bg-red-100', text: 'text-red-800', border: 'border-red-500', headerBg: 'bg-red-500', headerText: 'text-white' },
+          purple: { bg: 'bg-purple-100', text: 'text-purple-800', border: 'border-purple-500', headerBg: 'bg-purple-500', headerText: 'text-white' },
+          orange: { bg: 'bg-orange-100', text: 'text-orange-800', border: 'border-orange-500', headerBg: 'bg-orange-500', headerText: 'text-white' },
+        };
+
+        // Component to render Lucide-like icons using inline SVG for direct HTML usage
+        const LucideIconSVG = ({ name, className }) => {
+          // SVG path data for the icons
+          const icons = {
+            Globe: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${className}"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><line x1="2" y1="12" x2="22" y2="12"/></svg>`,
+            Terminal: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${className}"><path d="M4 17.5v2H20v-2"/><path d="M4 14v-2.5a2.5 2.5 0 0 1 2.5-2.5H18a2.5 2.5 0 0 1 2.5 2.5V14"/><polyline points="8 8 12 12 8 16"/></svg>`,
+            Bug: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${className}"><path d="m8 2h8a4 4 0 0 1 4 4v2a4 4 0 0 1-4 4h-8a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4z"/><path d="M10 12v4"/><path d="M14 12v4"/><path d="M11 16a2 2 0 0 0 2 0"/><path d="M12 22a2 2 0 0 0 0-4"/></svg>`,
+            ShieldCheck: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${className}"><path d="M20 13c0 5-5 7-8 8-3-1-8-3-8-8V5l8-4 8 4z"/><path d="m9 12 2 2 4-4"/></svg>`,
+            AlertTriangle: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${className}"><path d="M12 2L2 22h20z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>`,
+            Flag: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${className}"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>`,
+            ExternalLink: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${className}"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`,
+          };
+          // Return the SVG string directly, dangerous but necessary for inline SVG rendering
+          return <div dangerouslySetInnerHTML={{ __html: icons[name] }} />;
+        };
+
+        // Function to parse markdown-like links and render them as actual HTML <a> tags
+        const parseAndRenderLinks = (text) => {
+          const parts = [];
+          // Regex to find [link text](url) patterns
+          const regex = /\[([^\]]+)\]\((https?:\/\/[^\s]+)\)/g;
+          let lastIndex = 0;
+          let match;
+
+          while ((match = regex.exec(text)) !== null) {
+            // Add any text that came before the current link
+            if (match.index > lastIndex) {
+              parts.push(text.substring(lastIndex, match.index));
+            }
+            // Add the clickable link using React's createElement or JSX
+            parts.push(
+              <a
+                key={match.index} // Unique key for React list rendering
+                href={match[2]} // The URL part of the link
+                target="_blank" // Opens link in a new tab
+                rel="noopener noreferrer" // Security best practice for target="_blank"
+                className="text-blue-600 hover:text-blue-800 underline transition-colors duration-200"
+              >
+                {match[1]} {/* The display text for the link */}
+              </a>
+            );
+            lastIndex = regex.lastIndex; // Update the last index to continue parsing
+          }
+          // Add any remaining text after the last link
+          if (lastIndex < text.length) {
+            parts.push(text.substring(lastIndex));
+          }
+          return <>{parts}</>; // Return a React Fragment containing all parsed parts
+        };
+
+        // Main App Component
+        const App = () => {
+          return (
+            <div className="min-h-screen bg-gray-50 font-sans text-gray-800 antialiased">
+              <header className="mb-8 text-center">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+                  12-Week Free Cybersecurity Learning Path
+                </h1>
+                <p className="mt-2 text-lg sm:text-xl text-gray-600">
+                  Your guided journey to cybersecurity fundamentals.
+                </p>
+              </header>
+
+              {/* Roadmap Cards Container */}
+              <div className="flex flex-wrap justify-center gap-6 mb-12">
+                {roadmapData.map((card, index) => (
+                  <div
+                    key={index}
+                    // Apply responsive sizing and styling based on card color
+                    className={`flex flex-col w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.33%-1.5rem)] xl:w-[calc(33.33%-1.5rem)]
+                               border-b-4 ${colorMap[card.color].border} rounded-lg shadow-lg overflow-hidden
+                               transform transition-transform duration-300 hover:scale-[1.01]`}
+                  >
+                    {/* Card Header */}
+                    <div className={`p-4 ${colorMap[card.color].headerBg} ${colorMap[card.color].headerText} flex items-center justify-between rounded-t-md`}>
+                      <div className="flex items-center gap-3">
+                        {/* Render icon using the custom SVG component */}
+                        <LucideIconSVG name={card.iconName} className="h-7 w-7 sm:h-8 sm:w-8" />
+                        <h2 className="text-xl sm:text-2xl font-bold">{card.module}</h2>
+                      </div>
+                      <span className="text-sm sm:text-base font-semibold opacity-90">
+                        {card.week}
+                      </span>
+                    </div>
+
+                    {/* Card Content */}
+                    <div className={`flex-grow p-5 ${colorMap[card.color].bg} ${colorMap[card.color].text} space-y-4 text-sm sm:text-base card-content`}>
+                      <div>
+                        <p className="card-section-title">🧠 Knowledge Focus:</p>
+                        <p>{card.sections.knowledge}</p>
+                      </div>
+                      <div>
+                        <p className="card-section-title">📚 Resources:</p>
+                        {parseAndRenderLinks(card.sections.resources)}
+                      </div>
+                      <div>
+                        <p className="card-section-title">💻 Practice / Hands-On:</p>
+                        <p>{card.sections.practice}</p>
+                      </div>
+                      <div>
+                        <p className="card-section-title">📘 Chapter Topics:</p>
+                        <p>{card.sections.topics}</p>
+                      </div>
+                      <div>
+                        <p className="card-section-title">🔁 What Comes Next:</p>
+                        <p>{card.sections.next}</p>
+                      </div>
+                      <div>
+                        <p className="card-section-title">🛠️ Extra Practice / Projects:</p>
+                        <ul className="list-disc ml-5">
+                          {card.sections.extra.map((item, i) => (
+                            <li key={i}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Legend Section */}
+              <div className="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto border border-gray-200">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">Legend</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-gray-700">
+                  <div>
+                    <p className="font-semibold text-lg mb-2">Color Codes:</p>
+                    <ul className="space-y-1">
+                      <li className="flex items-center"><span className="w-4 h-4 rounded mr-2 bg-blue-500"></span>Week 1-2 (Networking & Linux Basics)</li>
+                      <li className="flex items-center"><span className="w-4 h-4 rounded mr-2 bg-green-500"></span>Week 3-4 (Linux System Administration)</li>
+                      <li className="flex items-center"><span className="w-4 h-4 rounded mr-2 bg-yellow-500"></span>Week 5-6 (Ethical Hacking Intro)</li>
+                      <li className="flex items-center"><span className="w-4 h-4 rounded mr-2 bg-red-500"></span>Week 7-8 (Web App Security)</li>
+                      <li className="flex items-center"><span className="w-4 h-4 rounded mr-2 bg-purple-500"></span>Week 9-10 (Malware Analysis & Reverse Engineering)</li>
+                      <li className="flex items-center"><span className="w-4 h-4 rounded mr-2 bg-orange-500"></span>Week 11-12 (CTF Challenges)</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-lg mb-2">Icons Meaning:</p>
+                    <ul className="space-y-1">
+                      <li className="flex items-center"><LucideIconSVG name="Globe" className="h-5 w-5 mr-2" /> 🌐 Networking</li>
+                      <li className="flex items-center"><LucideIconSVG name="Terminal" className="h-5 w-5 mr-2" /> 💻 Linux</li>
+                      <li className="flex items-center"><LucideIconSVG name="Bug" className="h-5 w-5 mr-2" /> 🔍 Ethical Hacking</li>
+                      <li className="flex items-center"><LucideIconSVG name="ShieldCheck" className="h-5 w-5 mr-2" /> 🌐 Web Security</li>
+                      <li className="flex items-center"><LucideIconSVG name="AlertTriangle" className="h-5 w-5 mr-2" /> 🔍 Malware</li>
+                      <li className="flex items-center"><LucideIconSVG name="Flag" className="h-5 w-5 mr-2" /> 🏁 CTF</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-lg mb-2">Key Resources:</p>
+                    <ul className="space-y-1">
+                      {/* Using ExternalLink SVG directly here for consistency in legend */}
+                      <li><LucideIconSVG name="ExternalLink" className="inline h-4 w-4 align-text-bottom mr-1" /> Linux Journey</li>
+                      <li><LucideIconSVG name="ExternalLink" className="inline h-4 w-4 align-text-bottom mr-1" /> Cisco Packet Tracer</li>
+                      <li><LucideIconSVG name="ExternalLink" className="inline h-4 w-4 align-text-bottom mr-1" /> Linux From Scratch</li>
+                      <li><LucideIconSVG name="ExternalLink" className="inline h-4 w-4 align-text-bottom mr-1" /> TryHackMe Free Rooms</li>
+                      <li><LucideIconSVG name="ExternalLink" className="inline h-4 w-4 align-text-bottom mr-1" /> Metasploit Unleashed</li>
+                      <li><LucideIconSVG name="ExternalLink" className="inline h-4 w-4 align-text-bottom mr-1" /> PortSwigger Academy</li>
+                      <li><LucideIconSVG name="ExternalLink" className="inline h-4 w-4 align-text-bottom mr-1" /> Burp Suite Community Edition</li>
+                      <li><LucideIconSVG name="ExternalLink" className="inline h-4 w-4 align-text-bottom mr-1" /> Practical Malware Analysis PDF</li>
+                      <li><LucideIconSVG name="ExternalLink" className="inline h-4 w-4 align-text-bottom mr-1" /> Ghidra</li>
+                      <li><LucideIconSVG name="ExternalLink" className="inline h-4 w-4 align-text-bottom mr-1" /> OverTheWire</li>
+                      <li><LucideIconSVG name="ExternalLink" className="inline h-4 w-4 align-text-bottom mr-1" /> PicoCTF Archive</li>
+                      <li><LucideIconSVG name="ExternalLink" className="inline h-4 w-4 align-text-bottom mr-1" /> Hack The Box Starting Point</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        };
+
+        // Render the App component into the 'root' div
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+</html>
