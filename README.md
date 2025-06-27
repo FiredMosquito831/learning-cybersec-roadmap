@@ -3,6 +3,10 @@ My journey of hopefully learning studying and understanding cybersec
 ---
 # [Cool roadmap link site](https://firedmosquito831.github.io/learning-cybersec-roadmap/)
 ---
+
+## Bourne scripting tutorial:
+### [Bourne shell scripting tutorial online](https://zota.ase.ro/os/so_000.html)
+---
 Build a **strong foundation in cybersecurity**, with a focus on **system administration, ethical hacking, networking architecture**, and **Linux/Unix-based operating systems**, there are **many high-quality free resources** available. These include:
 
 - Free online courses
